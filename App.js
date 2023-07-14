@@ -1,15 +1,15 @@
 let taskHeading = document.querySelector(".task-heading");
-let input = document.querySelector(".add-input");
-let button = document.querySelector(".add-btn");
-const containerList = document.querySelector(".container-list");
+let input = document.querySelector(".add_input");
+let button = document.querySelector(".add_btn");
+const containerList = document.querySelector(".container_list");
 const modle_container = document.querySelector('.modle-container');
 
 input.setAttribute("placeholder", "Please Enter Task");
 
-
+/*-----add task-----*/
 function addTask() {
     if(input.value === "") {
-        alert("please enter task");
+        alert("Please Enter Task");
     }
     else {
     let inputValue = input.value;
@@ -24,29 +24,31 @@ function addTask() {
     const deleteTask = document.createElement('button');
     deleteTask.classList = "delete";
     deleteTask.innerText = "";
+
+    /*----------color change each div--------*/
     const itemColor = document.createElement('div');
     itemColor.classList.add('item-color');
     openList.appendChild(itemColor);
 
     openList.append(nameOfTask, descriptionOfTask, deleteTask)
     containerList.appendChild(openList);
-
+/*------------Delete Task-------*/
     deleteTask.addEventListener('click', (e) => {
         e.stopPropagation()
         openList.remove();
     })
     editModel(openList, nameOfTask, descriptionOfTask);
     input.value = null;
-
-    openList.setAttribute("draggable", "true");
+  /*--------dragging and dropping-------*/    
+  openList.setAttribute("draggable", "true");
     openList.addEventListener('dragstart', () => {
         openList.classList.add('dragging');
     });
     openList.addEventListener('dragend', () => {
         openList.classList.remove('dragging');
     });
-
-    const listcontainer = document.querySelectorAll('.container-list');
+/*-----------dragOver------*/
+    const listcontainer = document.querySelectorAll('.container_list');
     listcontainer.forEach((list) => {
         list.addEventListener('dragover', (e) => {
             e.preventDefault();
@@ -57,7 +59,7 @@ function addTask() {
 
 }
 }
-
+/*--------edit Modal-------*/
 function editModel(div, ip, des) {
     div.addEventListener('dblclick', (e) => {
         e.stopPropagation()
@@ -102,7 +104,7 @@ function editModel(div, ip, des) {
         console.log(div.childNodes);
     })
 }
-
+/*  --------------Save edit input------*/
 function saveTheEditedValue(btnFun, child, des, mainDiv, input1, input2, condition) {
     btnFun.addEventListener('click', (e) => {
         e.stopPropagation();
